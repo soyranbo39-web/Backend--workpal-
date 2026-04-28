@@ -12,6 +12,7 @@ class Alumno(Base):
     name: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
     last_name: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
     carrera: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
+    imagen_url: Mapped[str] = mapped_column(String(500), nullable=False, default="")
 
     lista_proyectos: Mapped[list] = relationship(
         "Proyecto",

@@ -1,5 +1,5 @@
 import os
-from datatime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import jwt
@@ -51,7 +51,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
 
     try:
         payload = decode_token(token)
-        sub = Optional[str] = payload.get("sub")
+        sub: Optional[str] = payload.get("sub")
         username:Optional[str] = payload.get("username")
 
         if not sub or not username:
