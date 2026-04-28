@@ -18,7 +18,7 @@ MEDIA_DIR= "app/media"
 
 
 def create_app()-> FastAPI:
-    app = FastAPI(title="Mini Blog")
+    app = FastAPI(title="Workpal API", version="1.0")
     Base.metadata.create_all(bind=engine)  # dev
     app.include_router(auth_router,prefix="/api/v1")
     app.include_router(post_router)
