@@ -1,19 +1,16 @@
 
-from typing import Optional, Annotated
-from typing import cast
+from typing import Annotated, Optional, cast
 
-from fastapi import APIRouter, HTTPException, status, Depends, File, UploadFile
-from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
-from .schemas import AlumnoCreate, AlumnoResponse
-from app.core.security import get_current_user
+
 from app.api.repository import PostRepository
 from app.core.db import get_db
+from app.core.security import get_current_user
 from app.services.file_storage import save_uploaded_image
 
-
-
-
+from .schemas import AlumnoCreate, AlumnoResponse
 
 router = APIRouter(
     prefix="/alumnos",
@@ -32,7 +29,7 @@ async def create_alumno(
     saved : Optional[dict[str, str]] = None
     try:
         if imagen is not None:
-            saved= cast(dict [str, str], await save_uploaded_image(imagen))
+            saved = cast(dict[str, str], save_uploaded_image(imagen))
         
         imagen_url : str = saved["url"] if saved is not None else ""
         if alumno.name is None : 
